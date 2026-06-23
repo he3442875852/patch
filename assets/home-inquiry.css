@@ -1,0 +1,74 @@
+.topbar a {
+  color: #fff;
+  font-weight: 900;
+}
+
+.contact-strip {
+  display: grid;
+  gap: 4px;
+  max-width: 680px;
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, .82);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--gold);
+  border-radius: var(--r);
+  color: #3e4853;
+}
+
+.contact-strip a,
+.email-note a {
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.contact-strip span {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.hero-proof-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.inquiry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+.inquiry-copy {
+  padding: 30px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+}
+
+.email-note {
+  margin-top: 22px;
+  font-weight: 900;
+}
+
+@media (max-width: 920px) {
+  .inquiry-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-proof-list {
+    grid-template-columns: 1fr;
+  }
+
+  .inquiry-copy {
+    padding: 24px;
+  }
+
+  .contact-strip {
+    font-size: 14px;
+  }
+}
