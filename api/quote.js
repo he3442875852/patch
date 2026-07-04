@@ -1,5 +1,6 @@
 const MAX_FILE_SIZE = 8 * 1024 * 1024;
 const MAX_BODY_SIZE = 10 * 1024 * 1024;
+const DEFAULT_QUOTE_TO_EMAIL = 'heypal01@163.com';
 const ALLOWED_EXTENSIONS = new Set(['jpg', 'jpeg', 'png', 'pdf', 'ai', 'svg', 'eps']);
 const ALLOWED_MIME = new Set(['image/jpeg', 'image/png', 'application/pdf', 'image/svg+xml', 'application/postscript', 'application/illustrator', 'application/octet-stream']);
 const recentSubmissions = new Map();
@@ -157,13 +158,7 @@ function validateSubmission(fields, file) {
 }
 
 async function deliverQuote(fields, file) {
-  const to = process.env.QUOTE_TO_EMAIL;
-  if (!to) {
-    const error = new Error('QUOTE_TO_EMAIL is not configured.');
-    error.statusCode = 500;
-    error.publicMessage = 'Quote receiving email is not configured.';
-    throw error;
-  }
+  const to = process.env.QUOTE_TO_EMAIL || DEFAULT_QUOTE_TO_EMAIL;
 
   const payload = buildPayload(fields, file);
   if (process.env.RESEND_API_KEY) {
