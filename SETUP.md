@@ -4,7 +4,7 @@ The homepage quote form submits to the Vercel Serverless Function at `POST /api/
 
 ## Required environment variables
 
-- `QUOTE_TO_EMAIL`: the inbox that receives quote requests.
+- `QUOTE_TO_EMAIL`: the inbox that receives quote requests. Set this to `heypal01@163.com`. If it is not configured, the API defaults to `heypal01@163.com`.
 - `RESEND_API_KEY`: Resend API key used to send quote emails.
 
 ## Optional environment variables
