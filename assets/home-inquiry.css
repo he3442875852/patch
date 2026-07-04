@@ -1,4 +1,4 @@
-.topbar a {
+﻿.topbar a {
   color: #fff;
   font-weight: 900;
 }
@@ -23,7 +23,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .hero-photo {
@@ -242,3 +242,4 @@
     font-size: 14px;
   }
 }
+
