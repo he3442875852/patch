@@ -1,4 +1,4 @@
-const MAX_FILE_SIZE = 8 * 1024 * 1024;
+﻿const MAX_FILE_SIZE = 8 * 1024 * 1024;
 const MAX_BODY_SIZE = 10 * 1024 * 1024;
 const DEFAULT_QUOTE_TO_EMAIL = 'heypal01@163.com';
 const ALLOWED_EXTENSIONS = new Set(['jpg', 'jpeg', 'png', 'pdf', 'ai', 'svg', 'eps']);
@@ -142,11 +142,11 @@ function sanitizeFilename(filename) {
 }
 
 function validateSubmission(fields, file) {
-  if (!fields.name || !fields.email) return 'Please complete your name and email.';
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) return 'Please enter a valid email address.';
-  if (!fields.country) return 'Please enter your country.';
-  if (!fields.patchType) return 'Please select a patch type.';
-  if (!fields.quantity) return 'Please enter the quantity.';
+  if (!fields.name || !fields.email || !fields.quantity || !fields.message) return 'Please complete name, email or WhatsApp, quantity and message.';
+  const contact = String(fields.email || '').trim();
+  const looksLikeEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
+  const looksLikePhone = /^[+()\d\s.-]{7,}$/.test(contact);
+  if (!looksLikeEmail && !looksLikePhone) return 'Please enter a valid email address or WhatsApp number.';
 
   if (file && file.filename) {
     const extension = file.filename.split('.').pop().toLowerCase();
@@ -178,10 +178,12 @@ async function deliverQuote(fields, file) {
 
 function buildPayload(fields, file) {
   const safe = (value) => String(value || '').replace(/[<>]/g, '');
+  const contact = safe(fields.email);
+  const replyTo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact) ? contact : DEFAULT_QUOTE_TO_EMAIL;
   const lines = [
-    'New HeyPalPatch quote request', '',
+    'New Heypal Patch quote request', '',
     `Name: ${safe(fields.name)}`,
-    `Email: ${safe(fields.email)}`,
+    `Email or WhatsApp: ${contact}`,
     `Company: ${safe(fields.company)}`,
     `Country: ${safe(fields.country)}`,
     `Patch type: ${safe(fields.patchType)}`,
@@ -195,7 +197,7 @@ function buildPayload(fields, file) {
   return {
     subject: `Custom patch quote request - ${safe(fields.name)}`,
     text: lines.join('\n'),
-    replyTo: safe(fields.email),
+    replyTo,
     fields,
     attachment: file && file.filename ? { filename: file.filename, contentType: file.contentType, content: file.buffer.toString('base64') } : null
   };
@@ -203,7 +205,7 @@ function buildPayload(fields, file) {
 
 async function sendWithResend(to, payload) {
   const body = {
-    from: process.env.QUOTE_FROM_EMAIL || 'HeyPalPatch Quote <onboarding@resend.dev>',
+    from: process.env.QUOTE_FROM_EMAIL || 'Heypal Patch Quote <onboarding@resend.dev>',
     to: [to],
     reply_to: payload.replyTo,
     subject: payload.subject,
@@ -217,9 +219,11 @@ async function sendWithResend(to, payload) {
     body: JSON.stringify(body)
   });
   if (!response.ok) {
-    const error = new Error(`Resend failed: ${await response.text()}`);
+    const detail = await response.text();
+    const resendMessage = readProviderMessage(detail);
+    const error = new Error(`Resend failed: ${resendMessage}`);
     error.statusCode = 502;
-    error.publicMessage = 'Quote email could not be sent. Please try again later.';
+    error.publicMessage = `Quote email could not be sent: ${resendMessage}`;
     throw error;
   }
 }
@@ -231,9 +235,23 @@ async function sendWithWebhook(payload) {
     body: JSON.stringify(payload)
   });
   if (!response.ok) {
-    const error = new Error('Fallback webhook failed.');
+    const detail = await response.text();
+    const error = new Error(`Fallback webhook failed: ${readProviderMessage(detail)}`);
     error.statusCode = 502;
     error.publicMessage = 'Quote request could not be delivered. Please try again later.';
     throw error;
   }
+}
+
+function readProviderMessage(text) {
+  if (!text) return 'email provider rejected the request.';
+  try {
+    const data = JSON.parse(text);
+    if (typeof data.message === 'string') return data.message;
+    if (typeof data.error === 'string') return data.error;
+    if (data.error && typeof data.error.message === 'string') return data.error.message;
+  } catch {
+    // Keep the original text below.
+  }
+  return String(text).slice(0, 300);
 }

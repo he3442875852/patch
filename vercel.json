@@ -1,4 +1,21 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/custom-hat-patches", "destination": "/custom-patches-for-hats", "permanent": true },
+    { "source": "/custom-hat-patches.html", "destination": "/custom-patches-for-hats", "permanent": true },
+    { "source": "/custom-uniform-patches", "destination": "/custom-patches-for-uniforms", "permanent": true },
+    { "source": "/custom-uniform-patches.html", "destination": "/custom-patches-for-uniforms", "permanent": true },
+    { "source": "/how-it-works", "destination": "/custom-patch-order-process", "permanent": true },
+    { "source": "/how-it-works.html", "destination": "/custom-patch-order-process", "permanent": true },
+    { "source": "/how-to-order-custom-patches", "destination": "/custom-patch-order-process", "permanent": true },
+    { "source": "/how-to-order-custom-patches.html", "destination": "/custom-patch-order-process", "permanent": true },
+    { "source": "/custom-patch-artwork-guide", "destination": "/how-to-design-a-custom-patch", "permanent": true },
+    { "source": "/custom-patch-artwork-guide.html", "destination": "/how-to-design-a-custom-patch", "permanent": true },
+    { "source": "/iron-on-patches-backing-guide", "destination": "/iron-on-vs-sew-on-patches", "permanent": true },
+    { "source": "/iron-on-patches-backing-guide.html", "destination": "/iron-on-vs-sew-on-patches", "permanent": true },
+    { "source": "/velcro-patches-hook-and-loop-backing-guide", "destination": "/custom-velcro-patches", "permanent": true },
+    { "source": "/velcro-patches-hook-and-loop-backing-guide.html", "destination": "/custom-velcro-patches", "permanent": true }
+  ]
 }

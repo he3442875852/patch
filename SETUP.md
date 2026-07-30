@@ -1,4 +1,4 @@
-# HeyPalPatch Quote Form Setup
+# Heypal Patch Quote Form Setup
 
 The homepage quote form submits to the Vercel Serverless Function at `POST /api/quote`.
 
@@ -9,7 +9,7 @@ The homepage quote form submits to the Vercel Serverless Function at `POST /api/
 
 ## Optional environment variables
 
-- `QUOTE_FROM_EMAIL`: verified sender address for Resend. Defaults to `HeyPalPatch Quote <onboarding@resend.dev>` for testing.
+- `QUOTE_FROM_EMAIL`: verified sender address for Resend. Defaults to `Heypal Patch Quote <onboarding@resend.dev>` for testing.
 - `QUOTE_FALLBACK_WEBHOOK_URL`: optional JSON webhook fallback if `RESEND_API_KEY` is not configured.
 
 Do not commit API keys to the repository. Add them in Vercel Project Settings -> Environment Variables, then redeploy.

@@ -1,0 +1,14 @@
+{
+  "name": "heypalpatch-static-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:pages": "node scripts/build-pages.mjs",
+    "build:sitemap": "node scripts/generate-sitemap.mjs",
+    "build:image-sitemap": "node scripts/generate-image-sitemap.mjs",
+    "check:seo": "node scripts/check-seo.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "audit": "node scripts/build-pages.mjs && node scripts/generate-sitemap.mjs && node scripts/generate-image-sitemap.mjs && node scripts/check-seo.mjs && node scripts/check-links.mjs"
+  }
+}
