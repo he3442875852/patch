@@ -236,6 +236,133 @@ function quoteCta() {
   return `<section class="final-cta"><div class="wrap"><h2>Ready to Coordinate Your Custom Patch Order?</h2><p>Send your artwork, size, quantity, preferred patch type and shipping country. HeyPalPatch will review the details and prepare a quotation based on confirmed requirements.</p><div class="actions"><a class="button primary" href="/get-a-quote">Request a Quote</a><a class="button light" href="${site.whatsapp}?text=${encodeURIComponent(site.whatsappText)}">Chat on WhatsApp</a></div></div></section>`;
 }
 
+function asSentenceList(items) {
+  return items.map((item) => esc(item)).join(', ');
+}
+
+function intentSections(slug, direct) {
+  const common = [
+    ['Order Details to Confirm', 'For a useful quotation, send artwork, finished size, quantity, preferred backing, border style, shipping country and any deadline or application requirement.'],
+    ['Proof and Production Control', 'A digital proof is prepared after the project details are confirmed. Bulk production is arranged only after the customer reviews and approves the proof.'],
+    ['Shipping and Tracking', facts.photos]
+  ];
+  const details = {
+    'custom-iron-on-patches': [
+      ['Best Fit', 'Iron-on backing is convenient for suitable fabrics when buyers want heat application instead of hand sewing. Sew-on attachment may still be better for heavy wear, thick materials or frequent washing.'],
+      ['Material Notes', 'The patch material, garment fabric and heat tolerance should be checked before choosing iron-on backing. Application results depend on heat, pressure, time and the garment surface.']
+    ],
+    'custom-velcro-patches': [
+      ['Best Fit', 'Hook-and-loop patches are practical for removable use on uniforms, bags, morale panels and gear where patches may need to be changed or repositioned.'],
+      ['Material Notes', 'Confirm whether the order needs only the hook side or both hook and loop sides. PVC, embroidered and woven patches may all be considered depending on artwork and use.']
+    ],
+    'custom-sew-on-patches': [
+      ['Best Fit', 'Sew-on backing is a durable option for jackets, uniforms, hats and bags, especially when the patch will face regular wear or washing.'],
+      ['Material Notes', 'Sew-on patches can work with many patch types. Final edge, backing and thickness should be reviewed together with the garment material.']
+    ],
+    'custom-logo-patches': [
+      ['Best Fit', 'Logo patches work best when the artwork has clear shapes, readable lettering and a material choice matched to the brand style and placement.'],
+      ['Material Notes', 'Embroidery suits classic texture, woven suits small detail, PVC suits bold gear labels, leather suits simple marks and printed patches suit full-color artwork.']
+    ],
+    'custom-name-patches': [
+      ['Best Fit', 'Name patches need readable lettering, consistent sizing and enough contrast between the text and background. They are common for uniforms, teams and workwear.'],
+      ['Material Notes', 'Embroidery can work for bold names, while woven patches may be better for smaller lettering or longer names. Final size should be checked before proof preparation.']
+    ],
+    'custom-patches-for-jackets': [
+      ['Best Fit', 'Jacket patches can be small brand labels, sleeve patches or larger back patches. Attachment strength and finished size are especially important for this use case.'],
+      ['Material Notes', 'Chenille, embroidery, woven and leather patches may all work for jackets. Sew-on backing is often considered for long-term wear.']
+    ],
+    'custom-patches-for-hats': [
+      ['Best Fit', 'Hat patches usually need compact artwork that remains readable on a curved or limited placement area such as a front panel, side panel or beanie cuff.'],
+      ['Material Notes', 'Embroidered, woven, leather and PVC patches can be considered for hats. Simple shapes and clear text usually produce cleaner results.']
+    ],
+    'custom-patches-for-uniforms': [
+      ['Best Fit', 'Uniform patches usually require consistent sizing, readable identifiers and a backing that matches how the garment will be worn and maintained.'],
+      ['Material Notes', 'Embroidered and woven patches are common for uniforms. Hook-and-loop backing can be useful when removable patches are needed.']
+    ],
+    'custom-patches-for-backpacks': [
+      ['Best Fit', 'Backpack patches should be planned around abrasion, bag fabric and whether the patch is permanent or removable. Outdoor and retail bag use cases may need different materials.'],
+      ['Material Notes', 'PVC can work well for rugged styles, while embroidered, woven or leather patches may better suit brand labels and merchandise.']
+    ]
+  };
+  return [...(details[slug] || [['Best Fit', direct], ['Material Notes', 'The right specification depends on artwork detail, finished size, patch type, backing, border and intended application.']]), ...common];
+}
+
+function guideSections(slug, direct) {
+  const specific = {
+    'embroidered-vs-woven-patches': [
+      ['Main Difference', direct],
+      ['Choose Embroidered When', 'Use embroidery when the buyer wants raised thread texture, a classic patch feel and artwork built from bold shapes or readable lettering.'],
+      ['Choose Woven When', 'Use woven patches when the artwork has smaller text, thin lines or label-style detail that needs a flatter surface.']
+    ],
+    'pvc-vs-embroidered-patches': [
+      ['Main Difference', direct],
+      ['Choose PVC When', 'PVC is useful for bold molded shapes, gear patches, removable hook-and-loop systems and styles that need a rubber-like surface.'],
+      ['Choose Embroidery When', 'Embroidery is useful for classic fabric patches, uniforms, hats and merchandise where raised thread texture is part of the desired look.']
+    ],
+    'iron-on-vs-sew-on-patches': [
+      ['Main Difference', direct],
+      ['Choose Iron-On When', 'Iron-on backing may be convenient for suitable fabrics and lower-wear applications where heat application is acceptable.'],
+      ['Choose Sew-On When', 'Sew-on backing is usually the stronger choice for jackets, bags, uniforms and items that may face washing or regular abrasion.']
+    ],
+    'merrowed-border-vs-heat-cut-border': [
+      ['Main Difference', direct],
+      ['Choose Merrowed Border When', 'A merrowed border suits simple shapes such as circles, rectangles and shields where a raised stitched edge is desired.'],
+      ['Choose Heat-Cut Border When', 'A heat-cut edge is useful for custom outlines, detailed shapes and artwork that should follow a less standard silhouette.']
+    ]
+  };
+  return [
+    ...(specific[slug] || [['Main Consideration', direct], ['How to Choose', 'Start with artwork detail, expected texture, finished size, backing, garment type and delivery requirement.']]),
+    ['Cost Factors', 'Final pricing depends on patch type, finished size, quantity, colors, design complexity, backing, border, sample requirements and shipping destination. Fixed price claims are not used.'],
+    ['Approval Step', 'The customer reviews the digital proof before bulk production is arranged, so shape, size, colors, text, border and backing can be confirmed.']
+  ];
+}
+
+function utilitySections(slug, direct) {
+  const specific = {
+    gallery: [
+      ['How to Use the Gallery', direct],
+      ['What to Compare', 'Look at texture, edge thickness, color separation, surface finish and how readable the artwork remains at the intended size.']
+    ],
+    blog: [
+      ['Buyer Guide Focus', direct],
+      ['Useful Starting Points', 'Start with material choice, size planning, file preparation, backing options, MOQ, proof approval and shipping requirements.']
+    ],
+    'patch-backing-options': [
+      ['Backing Choice', direct],
+      ['Common Options', 'Sew-on, iron-on, hook-and-loop, adhesive and no-backing options may be considered depending on patch type and intended use.']
+    ],
+    'patch-border-options': [
+      ['Border Choice', direct],
+      ['Common Options', 'Merrowed, heat-cut, laser-cut, molded and stitched edges may be considered depending on shape, material and artwork.']
+    ],
+    'custom-patch-size-guide': [
+      ['Size Planning', direct],
+      ['Readability Check', 'Small patches need simpler artwork and larger lettering. Larger patches allow more detail but may require stronger attachment planning.']
+    ],
+    'custom-patch-backing-options-guide': [
+      ['Backing Planning', direct],
+      ['Application Check', 'Confirm fabric type, wash expectations, removability and whether the patch will be used on apparel, bags, packaging or display items.']
+    ],
+    'self-adhesive-vs-sew-on-patches': [
+      ['Main Difference', direct],
+      ['Use Case Check', 'Self-adhesive backing is generally for temporary or low-wear use, while sew-on backing is the practical option for durable garment attachment.']
+    ],
+    'custom-patches-for-business': [
+      ['Business Use Cases', direct],
+      ['Consistency Check', 'Business orders should confirm logo files, color references, repeated sizing, quantity, backing and shipping requirements before quotation.']
+    ],
+    'custom-motorcycle-patches': [
+      ['Motorcycle Patch Planning', direct],
+      ['Durability Check', 'Jacket and gear patches often benefit from durable sew-on attachment, readable design and an edge style that suits the patch shape.']
+    ]
+  };
+  return [
+    ...(specific[slug] || [['Planning Notes', direct], ['Specification Check', 'Confirm artwork, size, quantity, backing, border, shipping country and delivery requirement.']]),
+    ['Proof Approval', 'The customer reviews and approves the digital proof before bulk production is arranged.'],
+    ['Shipping and Tracking', facts.photos]
+  ];
+}
+
 function productBody(product) {
   const page = { ...product, h1: product.name, imageAlt: `${product.name} material reference` };
   const faqs = [
@@ -249,12 +376,12 @@ function productBody(product) {
 ${quickFacts(product)}
 <section class="section"><div class="wrap two-col align-start">
   <div class="content-flow">
-    <h2>What This Patch Type Is</h2><p>${esc(product.short)} ${esc(product.texture)}</p>
-    <h2>Best Artwork Types</h2><p>${esc(product.detail)}</p>
-    <h2>Surface and Texture</h2><p>${esc(product.texture)}</p>
-    <h2>Detail Limitations</h2><p>${esc(product.detail)}</p>
-    <h2>Available Backings</h2><ul>${product.backings.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>
-    <h2>Border Options</h2><ul>${product.borders.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>
+    <h2>Material Fit</h2><p>${esc(product.direct)}</p>
+    <h2>Artwork Strengths</h2><p>${esc(product.detail)}</p>
+    <h2>Surface Feel</h2><p>${esc(product.texture)}</p>
+    <h2>Design Watchouts</h2><p>This option is not ideal for ${asSentenceList(product.notIdeal).toLowerCase()}. Send the final artwork and size so readability and production requirements can be checked before quotation.</p>
+    <h2>Backing Choices</h2><ul>${product.backings.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>
+    <h2>Border Choices</h2><ul>${product.borders.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>
     <h2>Common Applications</h2><ul>${product.bestFor.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>
   </div>
   <aside class="side-stack">
@@ -467,23 +594,13 @@ function buildProducts() {
 
 function buildIntentPages() {
   intentPages.forEach(([slug, h1, description, direct, img, links]) => {
-    standardPage(slug, h1, `${h1} | HeyPalPatch`, description, direct, [
-      ['Best Uses', 'This page helps buyers decide whether the patch style fits their application, garment type, artwork and order requirements.'],
-      ['Material and Backing Fit', 'The best specification depends on patch type, finished size, number of colors, backing, border and intended application.'],
-      ['Proof Review', 'A digital proof is prepared after order details are confirmed, and bulk production is arranged only after customer approval.'],
-      ['Shipment Support', facts.photos]
-    ], links, imagePath(img));
+    standardPage(slug, h1, `${h1} | HeyPalPatch`, description, direct, intentSections(slug, direct), links, imagePath(img));
   });
 }
 
 function buildGuidePages() {
   guidePages.forEach(([slug, h1, description, direct, links]) => {
-    standardPage(slug, h1, `${h1} | HeyPalPatch`, description, direct, [
-      ['Direct Comparison', direct],
-      ['How to Choose', 'Start with artwork detail, expected texture, finished size, backing, garment type and delivery requirement. HeyPalPatch can compare practical options after reviewing your files.'],
-      ['Cost Factors', 'Final pricing depends on patch type, finished size, quantity, colors, design complexity, backing, border, sample requirements and shipping destination. Fixed price claims are not used.'],
-      ['Approval Step', 'The customer reviews the digital proof before bulk production is arranged, so shape, size, colors, text, border and backing can be confirmed.']
-    ], links, '/assets/patch-materials-closeup.webp');
+    standardPage(slug, h1, `${h1} | HeyPalPatch`, description, direct, guideSections(slug, direct), links, '/assets/patch-materials-closeup.webp');
   });
 }
 
@@ -499,12 +616,7 @@ function buildUtilityPages() {
     ['custom-patches-for-business', 'Custom Patches for Business', 'Coordinate custom business patches for uniforms, merch, events and branded packaging.', 'Business patch orders usually need consistent artwork, clear size requirements and a material that fits the use case. HeyPalPatch coordinates quotation, proof approval and shipping support.', ['custom-logo-patches', 'custom-patches-for-uniforms', 'get-a-quote']],
     ['custom-motorcycle-patches', 'Custom Motorcycle Patches', 'Plan custom motorcycle patches for jackets, clubs and gear with durable backing and border guidance.', 'Motorcycle patches often need durable attachment, readable design and a size suitable for jackets or gear. Sew-on embroidered or chenille styles may be considered based on artwork.', ['custom-patches-for-jackets', 'custom-sew-on-patches', 'custom-embroidered-patches']]
   ];
-  utility.forEach(([slug, h1, description, direct, links]) => standardPage(slug, h1, `${h1} | HeyPalPatch`, description, direct, [
-    ['Planning Notes', direct],
-    ['Information Needed', 'Send artwork, patch type, finished size, quantity, backing, border, shipping country and delivery requirement for a clearer quotation.'],
-    ['Proof Approval', 'The customer reviews and approves the digital proof before bulk production is arranged.'],
-    ['Shipping and Tracking', facts.photos]
-  ], links));
+  utility.forEach(([slug, h1, description, direct, links]) => standardPage(slug, h1, `${h1} | HeyPalPatch`, description, direct, utilitySections(slug, direct), links));
 }
 
 buildCorePages();
