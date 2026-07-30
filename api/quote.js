@@ -57,8 +57,8 @@ async function handler(req, res) {
   }
 }
 
-module.exports = handler;
-module.exports.config = { api: { bodyParser: false } };
+export default handler;
+export const config = { api: { bodyParser: false } };
 
 function setJsonHeaders(res) {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
