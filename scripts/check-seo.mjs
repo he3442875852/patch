@@ -22,6 +22,7 @@ for (const file of files) {
   const h1Count = (html.match(/<h1\b/gi) || []).length;
   const noindex = /<meta name="robots" content="[^"]*noindex/i.test(html);
 
+  if (/\bundefined\b|\bNaN\b/.test(html)) errors.push(`${file}: contains generated placeholder text`);
   if (!title) errors.push(`${file}: missing title`);
   if (!description) errors.push(`${file}: missing meta description`);
   if (title) addUnique(titles, title, file, 'duplicate title');

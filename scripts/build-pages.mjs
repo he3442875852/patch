@@ -187,7 +187,7 @@ function hero(page, actions = true) {
       <p class="lead">${esc(page.direct || page.description)}</p>
       ${actions ? `<div class="actions"><a class="button primary" href="/get-a-quote">Request a Quote</a><a class="button secondary" href="/patch-types">Compare Patch Types</a></div>` : ''}
     </div>
-    ${hasImage ? `<figure class="hero-media"><img src="${page.image}" width="900" height="900" decoding="async" fetchpriority="high" alt="${esc(page.imageAlt || page.h1)}"><figcaption>${esc(page.imageCaption || 'Material reference')}</figcaption></figure>` : ''}
+    ${hasImage ? `<figure class="hero-media ${page.heroClass || ''}"><img src="${page.image}" width="900" height="900" decoding="async" fetchpriority="high" alt="${esc(page.imageAlt || page.h1)}"><figcaption>${esc(page.imageCaption || 'Material reference')}</figcaption></figure>` : ''}
   </div>
 </section>`;
 }
@@ -217,7 +217,7 @@ function buyerChecklist() {
 }
 
 function faqBlock(items = faqItems.slice(0, 5)) {
-  return `<section class="section"><div class="wrap two-col align-start"><div><p class="eyebrow">FAQ</p><h2>Common Buyer Questions</h2></div><div class="faq-list">${items.map(([question, answer], index) => `<details${index === 0 ? ' open' : ''}><summary>${esc(question)}</summary><p>${esc(answer)}</p></details>`).join('')}</div></div></section>`;
+  return `<section class="section faq-section"><div class="wrap faq-grid"><div class="faq-intro"><p class="eyebrow">FAQ</p><h2>Common Buyer Questions</h2><p>Answers below use only confirmed HeyPalPatch order information: standard MOQ, paid samples, proof approval, PayPal payment, shipment photos and international shipping coordination from China.</p><ul class="mini-facts"><li>50-piece MOQ for embroidered patches</li><li>100-piece MOQ for most other patch types</li><li>Digital proof before bulk production</li><li>PayPal payment for confirmed orders</li></ul></div><div class="faq-list">${items.map(([question, answer], index) => `<details${index === 0 ? ' open' : ''}><summary>${esc(question)}</summary><p>${esc(answer)}</p></details>`).join('')}</div></div></section>`;
 }
 
 function related(slugs) {
@@ -237,6 +237,7 @@ function quoteCta() {
 }
 
 function productBody(product) {
+  const page = { ...product, h1: product.name, imageAlt: `${product.name} material reference` };
   const faqs = [
     ['What is the MOQ for this patch type?', product.slug === 'custom-embroidered-patches' ? 'The standard MOQ for embroidered patches is 50 pieces. Final requirements may still depend on design, size and production requirements.' : 'The standard MOQ for this patch type is 100 pieces. Final requirements may still depend on design, size and production requirements.'],
     ['Can I approve the design first?', 'Yes. The customer reviews and approves the digital proof before bulk production is arranged.'],
@@ -244,7 +245,7 @@ function productBody(product) {
     ['How long does production usually take?', facts.production],
     ['Which shipping services can be used?', facts.shipping]
   ];
-  return `${hero(product)}
+  return `${hero(page)}
 ${quickFacts(product)}
 <section class="section"><div class="wrap two-col align-start">
   <div class="content-flow">
@@ -262,8 +263,8 @@ ${quickFacts(product)}
     ${buyerChecklist()}
   </aside>
 </div></section>
-<section class="section band"><div class="wrap two-col align-start"><div><h2>MOQ, Samples and Proof Approval</h2><p>The standard minimum order quantity is ${product.slug === 'custom-embroidered-patches' ? facts.embroideredMoq : facts.otherMoq}. ${facts.sample} A digital proof is usually prepared within approximately 3-4 days after order details and artwork requirements are confirmed.</p></div><div><h2>Production Timing</h2><p>Bulk production usually takes approximately 8-10 days after the customer approves the digital proof. Timing may vary depending on patch type, quantity, artwork complexity and production requirements.</p></div></div></section>
-<section class="section"><div class="wrap"><h2>Comparison With Alternatives</h2>${comparisonTable(product)}</div></section>
+<section class="section band"><div class="wrap"><p class="eyebrow">Order information</p><h2>MOQ, Samples, Proofs and Timing</h2><div class="card-grid"><article class="card"><h3>Standard MOQ</h3><p>The standard minimum order quantity is ${product.slug === 'custom-embroidered-patches' ? facts.embroideredMoq : facts.otherMoq}. Final MOQ may still depend on design, size, material and production requirements.</p></article><article class="card"><h3>Physical Samples</h3><p>${facts.sample} The fee depends on artwork, finished size, number of colors, material, backing and border requirements.</p></article><article class="card"><h3>Proof and Production</h3><p>A digital proof is usually prepared within approximately 3-4 days after details are confirmed. Bulk production usually takes approximately 8-10 days after customer approval.</p></article></div></div></section>
+<section class="section"><div class="wrap"><p class="eyebrow">Comparison</p><h2>Comparison With Alternatives</h2>${comparisonTable(product)}</div></section>
 ${faqBlock(faqs)}
 ${related(product.compare)}
 ${quoteCta()}`;
@@ -334,11 +335,12 @@ function buildCorePages() {
     image: '/assets/custom-patches-hero.webp',
     imageAlt: 'Custom patches for brands teams and merchandise',
     faqs: faqItems.slice(0, 6),
-    body: `${hero({ h1: 'Custom Patches, Coordinated From Artwork to Delivery.', title: '', description: '', direct: 'HeyPalPatch helps brands, teams, clubs and merchandise buyers order custom patches from China. Send your artwork and requirements to receive a quotation, review a digital proof and confirm the design before bulk production is arranged.', image: '/assets/custom-patches-hero.webp', imageAlt: 'Custom patches for brands teams and merchandise' })}
+    body: `${hero({ h1: 'Custom Patches, Coordinated From Artwork to Delivery.', title: '', description: '', direct: 'HeyPalPatch helps brands, teams, clubs and merchandise buyers order custom patches from China. Send your artwork and requirements to receive a quotation, review a digital proof and confirm the design before bulk production is arranged.', image: '/assets/custom-patches-hero.webp', imageAlt: 'Custom patches for brands teams and merchandise', imageCaption: 'Patch material and backing reference', heroClass: 'hero-media-wide' })}
 <section class="trust-strip"><div class="wrap trust-grid"><span>Embroidered Patch MOQ From 50 Pieces</span><span>Digital Proof Before Bulk Production</span><span>Physical Samples Available</span><span>PayPal Payment Supported</span><span>Shipment Photos and Tracking Provided</span></div></section>
 <section class="section"><div class="wrap"><p class="eyebrow">Patch Types</p><h2>Compare Materials Before You Quote</h2><div class="product-grid">${products.map((product) => `<article class="product-card"><img src="${product.image}" width="640" height="640" loading="lazy" decoding="async" alt="${esc(product.name)} material reference"><h3><a href="/${product.slug}">${esc(product.name)}</a></h3><p>${esc(product.short)}</p></article>`).join('')}</div></div></section>
 <section class="section band"><div class="wrap"><p class="eyebrow">How the order process works</p><h2>Clear Approval Steps Before Production</h2><div class="step-grid">${orderSteps.slice(0, 6).map(([step, text], index) => `<article class="step"><span>${index + 1}</span><h3>${esc(step)}</h3><p>${esc(text)}</p></article>`).join('')}</div></div></section>
-<section class="section"><div class="wrap two-col align-start"><div><p class="eyebrow">Standard MOQ</p><h2>MOQ, Samples and Timing</h2><p>The standard minimum order quantity is 50 pieces for embroidered patches and 100 pieces for most other patch types. Physical samples are available with a sample fee, and digital proofs are usually prepared within approximately 3-4 days after confirmed details.</p></div><div class="content-flow"><h2>Material Comparison</h2>${comparisonTable(products[0])}</div></div></section>
+<section class="section"><div class="wrap"><p class="eyebrow">Standard MOQ</p><h2>MOQ, Samples and Timing</h2><div class="card-grid"><article class="card"><h3>Minimum Order Quantity</h3><p>The standard minimum order quantity is 50 pieces for embroidered patches and 100 pieces for most other patch types. Final MOQ may still depend on the design, size, material and production requirements.</p></article><article class="card"><h3>Physical Samples</h3><p>Physical samples are available with a sample fee. The fee depends on artwork, finished size, number of colors, material, backing and border requirements.</p></article><article class="card"><h3>Proof and Production Timing</h3><p>A digital proof is usually prepared within approximately 3-4 days after details are confirmed. Bulk production usually takes approximately 8-10 days after customer approval.</p></article></div></div></section>
+<section class="section band"><div class="wrap"><p class="eyebrow">Material comparison</p><h2>Start With Texture, Detail and Application</h2><p class="section-lead">The best patch type depends on artwork detail, expected surface feel, backing, border and how the patch will be used. This comparison is a starting point before HeyPalPatch reviews the actual artwork and order requirements.</p>${comparisonTable(products[0])}</div></section>
 <section class="section band"><div class="wrap"><p class="eyebrow">Popular applications</p><h2>Built Around Buyer Use Cases</h2><div class="card-grid">${intentPages.slice(5, 9).map(([slug, name, desc]) => `<article class="card"><h3><a href="/${slug}">${esc(name)}</a></h3><p>${esc(desc)}</p></article>`).join('')}</div></div></section>
 <section class="section"><div class="wrap two-col align-start"><div><p class="eyebrow">Shipping options</p><h2>International Shipping Coordination</h2><p>${facts.shipping} The final method depends on destination, package weight, delivery requirement and available service.</p></div>${buyerChecklist()}</div></section>
 ${faqBlock(faqItems.slice(0, 6))}
