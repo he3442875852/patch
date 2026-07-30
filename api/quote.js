@@ -142,11 +142,11 @@ function sanitizeFilename(filename) {
 }
 
 function validateSubmission(fields, file) {
-  if (!fields.name || !fields.email) return 'Please complete your name and email.';
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email)) return 'Please enter a valid email address.';
-  if (!fields.country) return 'Please enter your country.';
-  if (!fields.patchType) return 'Please select a patch type.';
-  if (!fields.quantity) return 'Please enter the quantity.';
+  if (!fields.name || !fields.email || !fields.quantity || !fields.message) return 'Please complete name, email or WhatsApp, quantity and message.';
+  const contact = String(fields.email || '').trim();
+  const looksLikeEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
+  const looksLikePhone = /^[+()\d\s.-]{7,}$/.test(contact);
+  if (!looksLikeEmail && !looksLikePhone) return 'Please enter a valid email address or WhatsApp number.';
 
   if (file && file.filename) {
     const extension = file.filename.split('.').pop().toLowerCase();
@@ -178,10 +178,12 @@ async function deliverQuote(fields, file) {
 
 function buildPayload(fields, file) {
   const safe = (value) => String(value || '').replace(/[<>]/g, '');
+  const contact = safe(fields.email);
+  const replyTo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact) ? contact : DEFAULT_QUOTE_TO_EMAIL;
   const lines = [
     'New HeyPalPatch quote request', '',
     `Name: ${safe(fields.name)}`,
-    `Email: ${safe(fields.email)}`,
+    `Email or WhatsApp: ${contact}`,
     `Company: ${safe(fields.company)}`,
     `Country: ${safe(fields.country)}`,
     `Patch type: ${safe(fields.patchType)}`,
@@ -195,7 +197,7 @@ function buildPayload(fields, file) {
   return {
     subject: `Custom patch quote request - ${safe(fields.name)}`,
     text: lines.join('\n'),
-    replyTo: safe(fields.email),
+    replyTo,
     fields,
     attachment: file && file.filename ? { filename: file.filename, contentType: file.contentType, content: file.buffer.toString('base64') } : null
   };
