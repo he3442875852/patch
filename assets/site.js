@@ -2,7 +2,6 @@
   const header = document.querySelector('[data-header]');
   const menuToggle = document.querySelector('.menu-toggle');
   const primaryNav = document.querySelector('.primary-nav');
-  const mobileQuote = document.querySelector('.mobile-sticky-quote');
   const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf', 'ai', 'svg', 'eps'];
   const maxFileSize = 8 * 1024 * 1024;
   let lastSubmitAt = 0;
@@ -30,16 +29,6 @@
         menuToggle.setAttribute('aria-expanded', 'false');
       }
     });
-  }
-
-  if (mobileQuote) {
-    const quoteForm = document.querySelector('#quoteForm');
-    if (quoteForm && 'IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => mobileQuote.classList.toggle('is-hidden', entry.isIntersecting));
-      });
-      observer.observe(quoteForm);
-    }
   }
 
   document.querySelectorAll('input[type="file"]').forEach((input) => {
@@ -115,7 +104,7 @@
       if (nameTarget) nameTarget.textContent = 'No file selected';
       setStatus(form, 'Thanks. Your request has been sent.', 'success');
     } catch (error) {
-      setStatus(form, `${error.message} You can also email heypal01@163.com or contact WhatsApp +86 183 9080 0841.`, 'error');
+      setStatus(form, `${error.message} Please try again or use the WhatsApp button.`, 'error');
     } finally {
       if (button) {
         button.disabled = false;

@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+﻿import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { site } from './site-content.mjs';
@@ -45,12 +45,12 @@ const feedItems = urls
   .map(({ loc, file }) => {
     const html = fs.readFileSync(file, 'utf8');
     const title = (html.match(/<title>([^<]+)<\/title>/i) || [null, loc])[1];
-    const description = (html.match(/<meta name="description" content="([^"]+)"/i) || [null, 'Custom patch buyer guide from HeyPalPatch.'])[1];
+    const description = (html.match(/<meta name="description" content="([^"]+)"/i) || [null, 'Custom patch buyer guide from Heypal Patch.'])[1];
     return `<item><title>${escapeXml(title)}</title><link>${loc}</link><guid>${loc}</guid><description>${escapeXml(description)}</description></item>`;
   }).join('\n');
 
 fs.writeFileSync(path.join(root, 'feed.xml'), `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"><channel><title>HeyPalPatch Custom Patch Guides</title><link>${site.origin}</link><description>Custom patch buyer guides, material comparisons and order information.</description>${feedItems}</channel></rss>
+<rss version="2.0"><channel><title>Heypal Patch Custom Patch Guides</title><link>${site.origin}</link><description>Custom patch buyer guides, material comparisons and order information.</description>${feedItems}</channel></rss>
 `, 'utf8');
 
 function escapeXml(value) {

@@ -1,6 +1,6 @@
 URL,Page Type,Primary Intent,Primary Topic,Secondary Questions,Parent Hub,Related Pages,Existing or New,Cannibalization Risk,Status
 /,Home,Commercial overview,Custom patches for brands teams and merchandise,"MOQ; proof approval; shipping; quote process",Home,"/patch-types; /samples-and-moq; /get-a-quote",Existing,Low,Updated
-/about,Company,Trust and identity,Custom patch order support from China,"Who is HeyPalPatch; what information is public; how orders are coordinated",Home,"/custom-patch-order-process; /contact; /patch-types",New,Low,Added
+/about,Company,Trust and identity,Custom patch order support from China,"Who is Heypal Patch; what information is public; how orders are coordinated",Home,"/custom-patch-order-process; /contact; /patch-types",New,Low,Added
 /patch-types,Hub,Compare options,Custom patch types,"Which material fits my artwork; what backing should I choose",Home,"/custom-embroidered-patches; /custom-pvc-patches; /custom-woven-patches",New,Low,Added
 /custom-embroidered-patches,Product,Order embroidered patches,Custom embroidered patches,"MOQ; proof timing; backing options; small text limits",Patch Types,"/custom-woven-patches; /pvc-vs-embroidered-patches; /get-a-quote",Existing,Low,Updated
 /custom-woven-patches,Product,Order woven patches,Custom woven patches,"Small text; detail; woven vs embroidered",Patch Types,"/custom-embroidered-patches; /embroidered-vs-woven-patches; /get-a-quote",Existing,Low,Updated
@@ -29,5 +29,5 @@ URL,Page Type,Primary Intent,Primary Topic,Secondary Questions,Parent Hub,Relate
 /custom-patch-file-formats,Guide,Artwork files,Custom patch file formats,"Vector files; PNG; PDF; artwork review",Home,"/how-to-design-a-custom-patch; /custom-logo-patches; /get-a-quote",New,Low,Added
 /patch-care-guide,Guide,Care education,Patch care guide,"Washing; backing; garment wear",Home,"/custom-sew-on-patches; /custom-patches-for-jackets; /custom-leather-patches",New,Low,Added
 /faq,FAQ,Answer common questions,Custom patch FAQ,"MOQ; sample; proof; shipping; location",Home,"/samples-and-moq; /shipping-and-payment; /contact",Existing,Low,Updated
-/contact,Contact,Contact supplier,Contact HeyPalPatch,"Email; WhatsApp; quote request; China",Home,"/get-a-quote; /custom-patch-order-process; /faq",Existing,Low,Updated
+/contact,Contact,Contact supplier,Contact Heypal Patch,"Quote request; project details; artwork review",Home,"/get-a-quote; /custom-patch-order-process; /faq",Existing,Low,Updated
 /get-a-quote,Quote,Lead capture,Request custom patch quote,"What details to send; upload artwork; contact",Home,"/patch-types; /samples-and-moq; /shipping-and-payment",Existing,Low,Updated

@@ -9,7 +9,7 @@ The site was rebuilt as a static HTML, CSS and JavaScript website for `https://w
 ## Business Identity Accuracy
 
 - Removed or avoided factory-positioning language such as "custom patch manufacturer", "factory direct", "our factory", "in-house production", "production line", "factory capacity" and similar claims from public page content.
-- Repositioned HeyPalPatch as a China-based custom patch supplier, sourcing partner and project coordination service.
+- Repositioned Heypal Patch as a China-based custom patch supplier, sourcing partner and project coordination service.
 - Did not publish registered company name, detailed street address, factory address, business license, founder, employee count, factory area, equipment, certifications, awards, ratings or reviews.
 - Unified confirmed business information: Email `heypal01@163.com`, WhatsApp `+86 183 9080 0841`, Location `China`, embroidered MOQ `50 pieces`, most other patch types MOQ `100 pieces`, paid samples, digital proof usually approximately `3-4 days`, bulk production usually approximately `8-10 days after proof approval`, PayPal payment, and shipping coordination through 4PX, DHL, FedEx or UPS.
 - Future additions should only be made after the site owner confirms exact payment methods, sample fee rules, additional logistics services, supported file upload workflow and any public company information.

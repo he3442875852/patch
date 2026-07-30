@@ -1,6 +1,6 @@
-# HeyPalPatch
+# Heypal Patch
 
-HeyPalPatch is a China-based custom patch supplier and project coordination service for international custom patch buyers.
+Heypal Patch is a China-based custom patch supplier and project coordination service for international custom patch buyers.
 
 ## Key Pages
 - Home: https://www.heypalpatch.com
@@ -11,10 +11,7 @@ HeyPalPatch is a China-based custom patch supplier and project coordination serv
 - FAQ: https://www.heypalpatch.com/faq
 - Contact: https://www.heypalpatch.com/contact
 
-## Confirmed Business Information
-- Email: heypal01@163.com
-- WhatsApp: +86 183 9080 0841
-- Location: China
+## Confirmed Order Information
 - Embroidered patch MOQ: 50 pieces
 - Most other patch types MOQ: 100 pieces
 - Physical samples: available with a sample fee

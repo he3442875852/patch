@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+﻿import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { site } from './site-content.mjs';
@@ -26,9 +26,9 @@ ${entries}
 </urlset>
 `, 'utf8');
 
-fs.writeFileSync(path.join(root, 'llms.txt'), `# HeyPalPatch
+fs.writeFileSync(path.join(root, 'llms.txt'), `# Heypal Patch
 
-HeyPalPatch is a China-based custom patch supplier and project coordination service for international custom patch buyers.
+Heypal Patch is a China-based custom patch supplier and project coordination service for international custom patch buyers.
 
 ## Key Pages
 - Home: ${site.origin}
@@ -39,10 +39,7 @@ HeyPalPatch is a China-based custom patch supplier and project coordination serv
 - FAQ: ${site.origin}/faq
 - Contact: ${site.origin}/contact
 
-## Confirmed Business Information
-- Email: ${site.email}
-- WhatsApp: ${site.phoneDisplay}
-- Location: China
+## Confirmed Order Information
 - Embroidered patch MOQ: 50 pieces
 - Most other patch types MOQ: 100 pieces
 - Physical samples: available with a sample fee

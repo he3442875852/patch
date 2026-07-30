@@ -1,4 +1,4 @@
-const MAX_FILE_SIZE = 8 * 1024 * 1024;
+﻿const MAX_FILE_SIZE = 8 * 1024 * 1024;
 const MAX_BODY_SIZE = 10 * 1024 * 1024;
 const DEFAULT_QUOTE_TO_EMAIL = 'heypal01@163.com';
 const ALLOWED_EXTENSIONS = new Set(['jpg', 'jpeg', 'png', 'pdf', 'ai', 'svg', 'eps']);
@@ -181,7 +181,7 @@ function buildPayload(fields, file) {
   const contact = safe(fields.email);
   const replyTo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact) ? contact : DEFAULT_QUOTE_TO_EMAIL;
   const lines = [
-    'New HeyPalPatch quote request', '',
+    'New Heypal Patch quote request', '',
     `Name: ${safe(fields.name)}`,
     `Email or WhatsApp: ${contact}`,
     `Company: ${safe(fields.company)}`,
@@ -205,7 +205,7 @@ function buildPayload(fields, file) {
 
 async function sendWithResend(to, payload) {
   const body = {
-    from: process.env.QUOTE_FROM_EMAIL || 'HeyPalPatch Quote <onboarding@resend.dev>',
+    from: process.env.QUOTE_FROM_EMAIL || 'Heypal Patch Quote <onboarding@resend.dev>',
     to: [to],
     reply_to: payload.replyTo,
     subject: payload.subject,

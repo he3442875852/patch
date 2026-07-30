@@ -74,21 +74,17 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .brand {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   color: var(--ink);
   font-size: 24px;
   font-weight: 900;
   letter-spacing: 0;
-}
-.brand span {
-  margin-right: 7px;
-  padding: 5px 8px;
+  line-height: 1;
+  padding: 7px 10px;
   border: 2px solid var(--ink);
   border-radius: 3px;
   background: var(--ink);
   color: var(--paper);
-  font-size: 16px;
-  line-height: 1;
 }
 .primary-nav ul {
   display: flex;
@@ -216,14 +212,16 @@ h1 {
   font-size: clamp(38px, 5vw, 60px);
   line-height: 1.02;
   font-weight: 850;
+  overflow-wrap: anywhere;
 }
 h2 {
   margin: 0 0 14px;
   font-size: clamp(24px, 2.7vw, 36px);
   line-height: 1.12;
   font-weight: 850;
+  overflow-wrap: anywhere;
 }
-h3 { margin: 0 0 8px; font-size: 21px; line-height: 1.18; font-weight: 850; }
+h3 { margin: 0 0 8px; font-size: 21px; line-height: 1.18; font-weight: 850; overflow-wrap: anywhere; }
 .lead {
   max-width: 780px;
   margin: 22px 0 0;
@@ -454,6 +452,12 @@ th { color: var(--ink); font-weight: 900; }
   border-radius: var(--radius);
   background: var(--panel);
 }
+.quote-page-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, .52fr) minmax(0, 1fr);
+  gap: 36px;
+  align-items: start;
+}
 .quote-form label { display: grid; gap: 7px; font-size: 13px; font-weight: 900; }
 .quote-form input, .quote-form select, .quote-form textarea {
   width: 100%;
@@ -491,37 +495,45 @@ th { color: var(--ink); font-weight: 900; }
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr repeat(3, 1fr);
-  gap: 28px;
+  grid-template-columns: 1.05fr .9fr 1fr 1.2fr;
+  gap: 44px;
+  align-items: start;
 }
 .footer-brand { margin-bottom: 16px; color: #fff; }
 .site-footer h2 { margin: 0 0 12px; color: #fff; font-size: 15px; }
 .site-footer a { display: block; margin-bottom: 8px; color: rgba(255, 255, 255, .76); }
 .site-footer p { margin-top: 0; }
-.mobile-sticky-quote {
+.whatsapp-float {
   position: fixed;
-  right: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom));
-  z-index: 40;
-  display: none;
-  min-height: 48px;
+  right: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  z-index: 70;
+  display: inline-flex;
+  min-height: 52px;
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
+  gap: 8px;
+  padding: 0 18px;
   border-radius: 999px;
-  background: var(--accent);
+  background: #1f9d55;
   color: #fff;
   font-weight: 900;
   box-shadow: 0 16px 38px rgba(13, 15, 18, .25);
 }
-.mobile-sticky-quote.is-hidden { opacity: 0; pointer-events: none; }
+.whatsapp-float::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+}
 
 :focus-visible { outline: 3px solid rgba(255, 90, 54, .44); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
 @media (max-width: 1040px) {
-  .hero-grid, .two-col, .faq-grid { grid-template-columns: 1fr; }
+  .hero-grid, .two-col, .faq-grid, .quote-page-grid { grid-template-columns: 1fr; }
   .faq-intro { position: static; }
   .trust-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -571,11 +583,10 @@ th { color: var(--ink); font-weight: 900; }
   }
   .nav-shell { min-height: 70px; }
   .brand { font-size: 22px; }
-  .brand span { font-size: 15px; }
   .hero { padding: 42px 0 50px; }
   .hero-grid { gap: 28px; }
   .eyebrow { font-size: 11px; line-height: 1.35; }
-  h1 { font-size: clamp(34px, 10vw, 46px); }
+  h1 { font-size: clamp(32px, 8.4vw, 42px); }
   h2 { font-size: clamp(24px, 8vw, 32px); }
   .lead { font-size: 16px; line-height: 1.65; }
   .content-flow h2 { font-size: 23px; }
@@ -587,5 +598,11 @@ th { color: var(--ink); font-weight: 900; }
   table { min-width: 560px; }
   .file-upload { grid-template-columns: 1fr; }
   .file-upload-button { width: 100%; }
-  .mobile-sticky-quote { display: none; }
+  .whatsapp-float {
+    right: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    min-height: 46px;
+    padding: 0 14px;
+    font-size: 14px;
+  }
 }

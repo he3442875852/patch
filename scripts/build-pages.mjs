@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+﻿import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { site, facts, products, intentPages, guidePages, faqItems, orderSteps } from './site-content.mjs';
@@ -60,18 +60,8 @@ function head(page) {
       '@id': `${site.origin}/#organization`,
       name: site.brand,
       url: site.origin,
-      email: site.email,
-      telephone: site.phoneSchema,
-      description: 'HeyPalPatch is a China-based custom patch supplier providing quotation support, digital proof coordination, production arrangement and international shipping support for custom patch orders.',
-      location: site.location,
-      areaServed: 'International',
-      contactPoint: {
-        '@type': 'ContactPoint',
-        telephone: site.phoneSchema,
-        email: site.email,
-        contactType: 'sales',
-        availableLanguage: 'English'
-      }
+      description: 'Heypal Patch is a China-based custom patch supplier providing quotation support, digital proof coordination, production arrangement and international shipping support for custom patch orders.',
+      areaServed: 'International'
     },
     {
       '@type': 'WebSite',
@@ -128,10 +118,10 @@ function breadcrumbSchema(page) {
 
 function header() {
   return `<a class="skip-link" href="#main">Skip to content</a>
-  <div class="announcement-bar"><div class="wrap">Custom patch supplier and project coordination partner in China | ${site.email} | ${site.phoneDisplay}</div></div>
+  <div class="announcement-bar"><div class="wrap">Custom patch supplier and project coordination partner in China</div></div>
   <header class="site-header" data-header>
     <div class="wrap nav-shell">
-      <a class="brand" href="/" aria-label="HeyPalPatch home"><span>HeyPal</span>Patch</a>
+      <a class="brand" href="/" aria-label="Heypal Patch home">Heypal Patch</a>
       <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false"><span></span><span></span><span></span><span class="sr-only">Open menu</span></button>
       <nav class="primary-nav" id="primary-menu" aria-label="Primary navigation">
         <ul>
@@ -146,13 +136,13 @@ function header() {
 function footer() {
   return `<footer class="site-footer">
     <div class="wrap footer-grid">
-      <div><a class="brand footer-brand" href="/"><span>HeyPal</span>Patch</a><p>${esc(site.description)}</p><p>Email: <a href="mailto:${site.email}">${site.email}</a><br>WhatsApp: <a href="${site.whatsapp}">${site.phoneDisplay}</a><br>Location: China</p></div>
+      <div><a class="brand footer-brand" href="/">Heypal Patch</a><p>${esc(site.description)}</p></div>
       <div><h2>Company</h2><a href="/about">About</a><a href="/gallery">Gallery</a><a href="/blog">Blog</a><a href="/samples-and-moq">Samples and MOQ</a><a href="/shipping-and-payment">Shipping and Payment</a><a href="/custom-patch-order-process">Order Process</a><a href="/faq">FAQ</a><a href="/contact">Contact</a><a href="/get-a-quote">Quote</a></div>
       <div><h2>Patch Types</h2>${products.map((product) => `<a href="/${product.slug}">${esc(product.name)}</a>`).join('')}<a href="/custom-iron-on-patches">Iron-On Patches</a><a href="/custom-velcro-patches">Hook-and-Loop Patches</a></div>
       <div><h2>Buyer Guides</h2><a href="/embroidered-vs-woven-patches">Embroidered vs Woven</a><a href="/pvc-vs-embroidered-patches">PVC vs Embroidered</a><a href="/iron-on-vs-sew-on-patches">Iron-On vs Sew-On</a><a href="/how-much-do-custom-patches-cost">Patch Cost Factors</a><a href="/how-to-design-a-custom-patch">Design Guide</a><a href="/custom-patch-file-formats">File Formats</a><a href="/custom-patch-backing-options-guide">Backing Guide</a><a href="/patch-care-guide">Care Guide</a><a href="/custom-patches-for-business">Business Patches</a><a href="/custom-motorcycle-patches">Motorcycle Patches</a><a href="/self-adhesive-vs-sew-on-patches">Adhesive vs Sew-On</a></div>
     </div>
   </footer>
-  <a class="mobile-sticky-quote" href="/get-a-quote">Get a Quote</a>
+  <a class="whatsapp-float" href="${site.whatsapp}?text=${encodeURIComponent(site.whatsappText)}" aria-label="Chat with Heypal Patch on WhatsApp"><span>WhatsApp</span></a>
   <script src="/assets/site.js" defer></script>`;
 }
 
@@ -213,11 +203,11 @@ function quickFacts(product) {
 
 function buyerChecklist() {
   const items = ['Artwork or logo', 'Patch type', 'Finished size', 'Quantity', 'Number of colors', 'Backing', 'Border', 'Shipping country', 'Deadline or delivery requirement'];
-  return `<div class="check-card"><h2>Buyer Information Checklist</h2><p>For a clearer quotation, include these details when you contact HeyPalPatch.</p><ul class="check-list">${items.map((item) => `<li>${item}</li>`).join('')}</ul></div>`;
+  return `<div class="check-card"><h2>Buyer Information Checklist</h2><p>For a clearer quotation, include these details when you contact Heypal Patch.</p><ul class="check-list">${items.map((item) => `<li>${item}</li>`).join('')}</ul></div>`;
 }
 
 function faqBlock(items = faqItems.slice(0, 5)) {
-  return `<section class="section faq-section"><div class="wrap faq-grid"><div class="faq-intro"><p class="eyebrow">FAQ</p><h2>Common Buyer Questions</h2><p>Answers below use only confirmed HeyPalPatch order information: standard MOQ, paid samples, proof approval, PayPal payment, shipment photos and international shipping coordination from China.</p><ul class="mini-facts"><li>50-piece MOQ for embroidered patches</li><li>100-piece MOQ for most other patch types</li><li>Digital proof before bulk production</li><li>PayPal payment for confirmed orders</li></ul></div><div class="faq-list">${items.map(([question, answer], index) => `<details${index === 0 ? ' open' : ''}><summary>${esc(question)}</summary><p>${esc(answer)}</p></details>`).join('')}</div></div></section>`;
+  return `<section class="section faq-section"><div class="wrap faq-grid"><div class="faq-intro"><p class="eyebrow">FAQ</p><h2>Common Buyer Questions</h2><p>Answers below use only confirmed Heypal Patch order information: standard MOQ, paid samples, proof approval, PayPal payment, shipment photos and international shipping coordination from China.</p><ul class="mini-facts"><li>50-piece MOQ for embroidered patches</li><li>100-piece MOQ for most other patch types</li><li>Digital proof before bulk production</li><li>PayPal payment for confirmed orders</li></ul></div><div class="faq-list">${items.map(([question, answer], index) => `<details${index === 0 ? ' open' : ''}><summary>${esc(question)}</summary><p>${esc(answer)}</p></details>`).join('')}</div></div></section>`;
 }
 
 function related(slugs) {
@@ -229,11 +219,11 @@ function related(slugs) {
     const text = product?.short || intent?.[2] || guide?.[2] || 'Related custom patch information for buyers.';
     return `<article class="card"><h3><a href="/${slug}">${esc(title)}</a></h3><p>${esc(text)}</p></article>`;
   }).join('');
-  return `<section class="section band"><div class="wrap"><p class="eyebrow">Related guides</p><h2>Useful Next Steps</h2><div class="card-grid">${cards}<article class="card"><h3><a href="/get-a-quote">Request a Custom Patch Quote</a></h3><p>Send artwork, quantity, size and shipping country so HeyPalPatch can review the project details.</p></article></div></div></section>`;
+  return `<section class="section band"><div class="wrap"><p class="eyebrow">Related guides</p><h2>Useful Next Steps</h2><div class="card-grid">${cards}<article class="card"><h3><a href="/get-a-quote">Request a Custom Patch Quote</a></h3><p>Send artwork, quantity, size and shipping country so Heypal Patch can review the project details.</p></article></div></div></section>`;
 }
 
 function quoteCta() {
-  return `<section class="final-cta"><div class="wrap"><h2>Ready to Coordinate Your Custom Patch Order?</h2><p>Send your artwork, size, quantity, preferred patch type and shipping country. HeyPalPatch will review the details and prepare a quotation based on confirmed requirements.</p><div class="actions"><a class="button primary" href="/get-a-quote">Request a Quote</a><a class="button light" href="${site.whatsapp}?text=${encodeURIComponent(site.whatsappText)}">Chat on WhatsApp</a></div></div></section>`;
+  return `<section class="final-cta"><div class="wrap"><h2>Ready to Coordinate Your Custom Patch Order?</h2><p>Send your artwork, size, quantity, preferred patch type and shipping country. Heypal Patch will review the details and prepare a quotation based on confirmed requirements.</p><div class="actions"><a class="button primary" href="/get-a-quote">Request a Quote</a><a class="button light" href="${site.whatsapp}?text=${encodeURIComponent(site.whatsappText)}">Chat on WhatsApp</a></div></div></section>`;
 }
 
 function asSentenceList(items) {
@@ -425,7 +415,7 @@ function standardPage(slug, h1, title, description, direct, sections, links, ima
     body: `${hero({ slug, h1, title, description, direct, image, imageAlt: h1 })}
 <section class="section"><div class="wrap two-col align-start">
   <div class="content-flow">${sections.map(([heading, text]) => `<h2>${esc(heading)}</h2><p>${esc(text)}</p>`).join('')}</div>
-  <aside class="side-stack">${buyerChecklist()}<div class="check-card"><h2>Confirmed Business Details</h2><ul class="check-list"><li>Email: ${site.email}</li><li>WhatsApp: ${site.phoneDisplay}</li><li>Location: China</li><li>Payment: PayPal for confirmed orders</li></ul></div></aside>
+  <aside class="side-stack">${buyerChecklist()}<div class="check-card"><h2>Order Notes</h2><ul class="check-list"><li>PayPal payment for confirmed orders</li><li>Digital proof before bulk production</li><li>Shipment photos and tracking where available</li></ul></div></aside>
 </div></section>
 ${faqBlock(faqItems.slice(0, 5))}
 ${related(links)}
@@ -437,7 +427,7 @@ function quoteForm() {
   return `<form class="quote-form" id="quoteForm" action="/api/quote" method="post" enctype="multipart/form-data" novalidate>
   <div class="hp-field" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
   <label>Name<input name="name" autocomplete="name" required></label>
-  <label>Email or WhatsApp<input name="email" autocomplete="email" required></label>
+  <label>Contact Method<input name="email" autocomplete="email" required></label>
   <label>Company<input name="company" autocomplete="organization"></label>
   <label>Shipping Country<input name="country" autocomplete="country-name"></label>
   <label>Patch Type<select name="patchType"><option value="">Not sure yet</option>${patchTypes.map(([, name]) => `<option>${esc(name.replace('Custom ', ''))}</option>`).join('')}</select></label>
@@ -445,7 +435,7 @@ function quoteForm() {
   <label>Quantity<input name="quantity" inputmode="numeric" required placeholder="100 pieces"></label>
   <label>Deadline<input name="neededDate" type="text" inputmode="numeric" placeholder="YYYY-MM-DD"></label>
   <label class="form-wide">Message<textarea name="message" rows="5" required placeholder="Tell us about artwork, patch type, size, backing, border, shipping country and delivery requirement."></textarea></label>
-  <p class="form-wide field-help">Static upload is supported by the quote API. You can also send artwork files by email or WhatsApp after submitting the request.</p>
+  <p class="form-wide field-help">Static upload is supported by the quote API. Additional artwork files can be shared after submitting the request.</p>
   <label class="form-wide">Artwork File<span class="file-upload"><input id="artworkInput" class="file-upload-native" name="artwork" type="file" accept=".jpg,.jpeg,.png,.pdf,.ai,.svg,.eps,image/jpeg,image/png,application/pdf,image/svg+xml"><span class="file-upload-button">Choose Artwork</span><span class="file-upload-name" data-file-name>No file selected</span></span></label>
   <button class="button primary form-wide" type="submit">Submit Quote Request</button>
   <p class="form-status form-wide" role="status" aria-live="polite"></p>
@@ -455,19 +445,19 @@ function quoteForm() {
 function buildCorePages() {
   register({
     slug: 'index',
-    title: 'Custom Patches for Brands, Teams and Merchandise | HeyPalPatch',
+    title: 'Custom Patches for Brands, Teams and Merchandise | Heypal Patch',
     description: 'Order custom embroidered, woven, PVC, chenille, leather and printed patches with digital proof approval, flexible customization and international shipping support from China.',
     h1: 'Custom Patches, Coordinated From Artwork to Delivery.',
-    direct: 'HeyPalPatch helps brands, teams, clubs and merchandise buyers order custom patches from China. Send your artwork and requirements to receive a quotation, review a digital proof and confirm the design before bulk production is arranged.',
+    direct: 'Heypal Patch helps brands, teams, clubs and merchandise buyers order custom patches from China. Send your artwork and requirements to receive a quotation, review a digital proof and confirm the design before bulk production is arranged.',
     image: '/assets/custom-patches-hero.webp',
     imageAlt: 'Custom patches for brands teams and merchandise',
     faqs: faqItems.slice(0, 6),
-    body: `${hero({ h1: 'Custom Patches, Coordinated From Artwork to Delivery.', title: '', description: '', direct: 'HeyPalPatch helps brands, teams, clubs and merchandise buyers order custom patches from China. Send your artwork and requirements to receive a quotation, review a digital proof and confirm the design before bulk production is arranged.', image: '/assets/custom-patches-hero.webp', imageAlt: 'Custom patches for brands teams and merchandise', imageCaption: 'Patch material and backing reference', heroClass: 'hero-media-wide' })}
+    body: `${hero({ h1: 'Custom Patches, Coordinated From Artwork to Delivery.', title: '', description: '', direct: 'Heypal Patch helps brands, teams, clubs and merchandise buyers order custom patches from China. Send your artwork and requirements to receive a quotation, review a digital proof and confirm the design before bulk production is arranged.', image: '/assets/custom-patches-hero.webp', imageAlt: 'Custom patches for brands teams and merchandise', imageCaption: 'Patch material and backing reference', heroClass: 'hero-media-wide' })}
 <section class="trust-strip"><div class="wrap trust-grid"><span>Embroidered Patch MOQ From 50 Pieces</span><span>Digital Proof Before Bulk Production</span><span>Physical Samples Available</span><span>PayPal Payment Supported</span><span>Shipment Photos and Tracking Provided</span></div></section>
 <section class="section"><div class="wrap"><p class="eyebrow">Patch Types</p><h2>Compare Materials Before You Quote</h2><div class="product-grid">${products.map((product) => `<article class="product-card"><img src="${product.image}" width="640" height="640" loading="lazy" decoding="async" alt="${esc(product.name)} material reference"><h3><a href="/${product.slug}">${esc(product.name)}</a></h3><p>${esc(product.short)}</p></article>`).join('')}</div></div></section>
 <section class="section band"><div class="wrap"><p class="eyebrow">How the order process works</p><h2>Clear Approval Steps Before Production</h2><div class="step-grid">${orderSteps.slice(0, 6).map(([step, text], index) => `<article class="step"><span>${index + 1}</span><h3>${esc(step)}</h3><p>${esc(text)}</p></article>`).join('')}</div></div></section>
 <section class="section"><div class="wrap"><p class="eyebrow">Standard MOQ</p><h2>MOQ, Samples and Timing</h2><div class="card-grid"><article class="card"><h3>Minimum Order Quantity</h3><p>The standard minimum order quantity is 50 pieces for embroidered patches and 100 pieces for most other patch types. Final MOQ may still depend on the design, size, material and production requirements.</p></article><article class="card"><h3>Physical Samples</h3><p>Physical samples are available with a sample fee. The fee depends on artwork, finished size, number of colors, material, backing and border requirements.</p></article><article class="card"><h3>Proof and Production Timing</h3><p>A digital proof is usually prepared within approximately 3-4 days after details are confirmed. Bulk production usually takes approximately 8-10 days after customer approval.</p></article></div></div></section>
-<section class="section band"><div class="wrap"><p class="eyebrow">Material comparison</p><h2>Start With Texture, Detail and Application</h2><p class="section-lead">The best patch type depends on artwork detail, expected surface feel, backing, border and how the patch will be used. This comparison is a starting point before HeyPalPatch reviews the actual artwork and order requirements.</p>${comparisonTable(products[0])}</div></section>
+<section class="section band"><div class="wrap"><p class="eyebrow">Material comparison</p><h2>Start With Texture, Detail and Application</h2><p class="section-lead">The best patch type depends on artwork detail, expected surface feel, backing, border and how the patch will be used. This comparison is a starting point before Heypal Patch reviews the actual artwork and order requirements.</p>${comparisonTable(products[0])}</div></section>
 <section class="section band"><div class="wrap"><p class="eyebrow">Popular applications</p><h2>Built Around Buyer Use Cases</h2><div class="card-grid">${intentPages.slice(5, 9).map(([slug, name, desc]) => `<article class="card"><h3><a href="/${slug}">${esc(name)}</a></h3><p>${esc(desc)}</p></article>`).join('')}</div></div></section>
 <section class="section"><div class="wrap two-col align-start"><div><p class="eyebrow">Shipping options</p><h2>International Shipping Coordination</h2><p>${facts.shipping} The final method depends on destination, package weight, delivery requirement and available service.</p></div>${buyerChecklist()}</div></section>
 ${faqBlock(faqItems.slice(0, 6))}
@@ -475,21 +465,21 @@ ${related(['patch-types', 'samples-and-moq', 'shipping-and-payment'])}
 ${quoteCta()}`
   });
 
-  standardPage('about', 'Custom Patch Order Support From China', 'About HeyPalPatch | Custom Patch Order Support From China', 'Learn how HeyPalPatch supports international custom patch buyers with quotations, proof coordination, production arrangement and shipment tracking from China.', 'HeyPalPatch is a China-based custom patch supplier and project coordination service. We help international buyers request quotations, confirm patch specifications, review digital proofs, arrange production and receive shipment photos and tracking information.', [
-    ['What HeyPalPatch Provides', 'HeyPalPatch provides custom patch quotation support, patch material comparison, digital proof coordination, production arrangement after approval and international shipping support.'],
+  standardPage('about', 'Custom Patch Order Support From China', 'About Heypal Patch | Custom Patch Order Support From China', 'Learn how Heypal Patch supports international custom patch buyers with quotations, proof coordination, production arrangement and shipment tracking from China.', 'Heypal Patch is a China-based custom patch supplier and project coordination service. We help international buyers request quotations, confirm patch specifications, review digital proofs, arrange production and receive shipment photos and tracking information.', [
+    ['What Heypal Patch Provides', 'Heypal Patch provides custom patch quotation support, patch material comparison, digital proof coordination, production arrangement after approval and international shipping support.'],
     ['Who We Support', 'We support brands, teams, clubs, uniform buyers, event organizers and merchandise buyers that need custom patch orders coordinated from artwork to delivery.'],
     ['How Inquiries Are Reviewed', 'Buyer information is reviewed around artwork, size, quantity, patch type, backing, border, shipping country and delivery requirement before a quotation is prepared.'],
     ['How Shipment Information Is Shared', 'Before dispatch, finished product or shipment photos are provided where available, and tracking information is provided after shipping.']
   ], ['custom-patch-order-process', 'patch-types', 'contact']);
 
-  standardPage('samples-and-moq', 'Samples and MOQ for Custom Patches', 'Samples and MOQ for Custom Patches | HeyPalPatch', 'Review standard custom patch MOQ, paid sample availability, proof timing and order details needed before quotation.', 'The standard minimum order quantity is 50 pieces for embroidered patches and 100 pieces for most other patch types. Physical samples are available with a sample fee, and the final sample cost depends on design, size, colors, material and production requirements.', [
+  standardPage('samples-and-moq', 'Samples and MOQ for Custom Patches', 'Samples and MOQ for Custom Patches | Heypal Patch', 'Review standard custom patch MOQ, paid sample availability, proof timing and order details needed before quotation.', 'The standard minimum order quantity is 50 pieces for embroidered patches and 100 pieces for most other patch types. Physical samples are available with a sample fee, and the final sample cost depends on design, size, colors, material and production requirements.', [
     ['Standard MOQ', 'Embroidered patches usually start from 50 pieces. Most other patch types usually start from 100 pieces. Final requirements may depend on design, size, material and production requirements.'],
     ['Physical Samples', 'Physical samples are available with a sample fee. The fee depends on artwork, finished size, number of colors, material, backing and border requirements.'],
     ['Digital Proof Timing', 'A digital proof is usually prepared within approximately 3-4 days after order details and artwork requirements are confirmed.'],
     ['What Affects Final Requirements', 'Patch type, finished size, quantity, design complexity, backing, border, sample requirements and shipping destination can all affect quotation and timing.']
   ], ['custom-embroidered-patches', 'how-much-do-custom-patches-cost', 'get-a-quote']);
 
-  standardPage('shipping-and-payment', 'Shipping and Payment for Custom Patch Orders', 'Shipping and Payment for Custom Patch Orders | HeyPalPatch', 'Learn how HeyPalPatch coordinates shipping through 4PX, DHL, FedEx or UPS and supports PayPal payment for confirmed orders.', 'Shipping can generally be arranged through small-parcel logistics services such as 4PX or international express couriers including DHL, FedEx and UPS. The final shipping method depends on destination, package weight, delivery requirement and available service. PayPal payment is available for confirmed orders.', [
+  standardPage('shipping-and-payment', 'Shipping and Payment for Custom Patch Orders', 'Shipping and Payment for Custom Patch Orders | Heypal Patch', 'Learn how Heypal Patch coordinates shipping through 4PX, DHL, FedEx or UPS and supports PayPal payment for confirmed orders.', 'Shipping can generally be arranged through small-parcel logistics services such as 4PX or international express couriers including DHL, FedEx and UPS. The final shipping method depends on destination, package weight, delivery requirement and available service. PayPal payment is available for confirmed orders.', [
     ['Shipping Options', facts.shipping],
     ['How Shipping Is Chosen', 'The final shipping method depends on destination, package weight, delivery requirement and available service. Fixed transit times, fixed freight costs and duty-free delivery are not promised.'],
     ['Payment Method', 'PayPal payment is available for confirmed orders. PayPal account details are not published on the website.'],
@@ -498,15 +488,15 @@ ${quoteCta()}`
 
   register({
     slug: 'custom-patch-order-process',
-    title: 'Custom Patch Order Process | HeyPalPatch',
+    title: 'Custom Patch Order Process | Heypal Patch',
     description: 'Follow the custom patch order process from inquiry and quotation to digital proof approval, production arrangement, shipment photos and tracking.',
     h1: 'Custom Patch Order Process',
-    direct: 'HeyPalPatch coordinates custom patch orders through a clear process: inquiry, quotation, PayPal payment for confirmed orders, digital proof preparation, customer approval, production arrangement, shipment confirmation and delivery tracking. Bulk production is arranged only after the customer approves the digital proof.',
+    direct: 'Heypal Patch coordinates custom patch orders through a clear process: inquiry, quotation, PayPal payment for confirmed orders, digital proof preparation, customer approval, production arrangement, shipment confirmation and delivery tracking. Bulk production is arranged only after the customer approves the digital proof.',
     image: '/assets/patch-production-process.webp',
     imageAlt: 'Custom patch order process from proof review to shipment',
     faqs: faqItems.slice(0, 6),
     schemaType: 'Service',
-    body: `${hero({ h1: 'Custom Patch Order Process', direct: 'HeyPalPatch coordinates custom patch orders through a clear process: inquiry, quotation, PayPal payment for confirmed orders, digital proof preparation, customer approval, production arrangement, shipment confirmation and delivery tracking. Bulk production is arranged only after the customer approves the digital proof.', image: '/assets/patch-production-process.webp', imageAlt: 'Custom patch order process from proof review to shipment' })}
+    body: `${hero({ h1: 'Custom Patch Order Process', direct: 'Heypal Patch coordinates custom patch orders through a clear process: inquiry, quotation, PayPal payment for confirmed orders, digital proof preparation, customer approval, production arrangement, shipment confirmation and delivery tracking. Bulk production is arranged only after the customer approves the digital proof.', image: '/assets/patch-production-process.webp', imageAlt: 'Custom patch order process from proof review to shipment' })}
 <section class="section"><div class="wrap"><div class="step-grid">${orderSteps.map(([step, text], index) => `<article class="step"><span>${index + 1}</span><h2>${esc(step)}</h2><p>${esc(text)}</p></article>`).join('')}</div></div></section>
 ${related(['samples-and-moq', 'shipping-and-payment', 'get-a-quote'])}
 ${quoteCta()}`
@@ -514,15 +504,15 @@ ${quoteCta()}`
 
   register({
     slug: 'patch-types',
-    title: 'Custom Patch Types and Material Comparison | HeyPalPatch',
+    title: 'Custom Patch Types and Material Comparison | Heypal Patch',
     description: 'Compare embroidered, woven, PVC, chenille, leather, printed, iron-on, sew-on and hook-and-loop custom patch options.',
     h1: 'Custom Patch Types',
-    direct: 'Different patch types require different materials and production methods. HeyPalPatch coordinates suitable production resources according to the artwork, quantity, size and intended application, then provides a digital proof for customer approval before bulk production is arranged.',
+    direct: 'Different patch types require different materials and production methods. Heypal Patch coordinates suitable production resources according to the artwork, quantity, size and intended application, then provides a digital proof for customer approval before bulk production is arranged.',
     image: '/assets/patch-materials-closeup.webp',
     imageAlt: 'Custom patch material comparison',
     faqs: faqItems.slice(0, 5),
     schemaType: 'Service',
-    body: `${hero({ h1: 'Custom Patch Types', direct: 'Different patch types require different materials and production methods. HeyPalPatch coordinates suitable production resources according to the artwork, quantity, size and intended application, then provides a digital proof for customer approval before bulk production is arranged.', image: '/assets/patch-materials-closeup.webp', imageAlt: 'Custom patch material comparison' })}
+    body: `${hero({ h1: 'Custom Patch Types', direct: 'Different patch types require different materials and production methods. Heypal Patch coordinates suitable production resources according to the artwork, quantity, size and intended application, then provides a digital proof for customer approval before bulk production is arranged.', image: '/assets/patch-materials-closeup.webp', imageAlt: 'Custom patch material comparison' })}
 <section class="section"><div class="wrap"><p class="eyebrow">Material hub</p><h2>Choose by Detail, Texture and Application</h2><div class="product-grid">${products.map((product) => `<article class="product-card"><img src="${product.image}" width="640" height="640" loading="lazy" decoding="async" alt="${esc(product.name)} material reference"><h3><a href="/${product.slug}">${esc(product.name)}</a></h3><p>${esc(product.short)}</p></article>`).join('')}</div></div></section>
 <section class="section band"><div class="wrap"><h2>Backing and Application Pages</h2><div class="card-grid">${intentPages.map(([slug, name, desc]) => `<article class="card"><h3><a href="/${slug}">${esc(name)}</a></h3><p>${esc(desc)}</p></article>`).join('')}</div></div></section>
 ${faqBlock(faqItems.slice(0, 5))}
@@ -532,28 +522,28 @@ ${quoteCta()}`
 
   register({
     slug: 'contact',
-    title: 'Contact HeyPalPatch | Custom Patch Quotes',
-    description: 'Contact HeyPalPatch by email or WhatsApp for custom patch quotations, artwork review and international order coordination from China.',
-    h1: 'Contact HeyPalPatch',
-    direct: 'Send your artwork, required quantity, finished size, preferred patch type and shipping country. We will review the project information and prepare a quotation based on the confirmed requirements. HeyPalPatch is based in China and supports international custom patch inquiries and order coordination.',
+    title: 'Contact Heypal Patch | Custom Patch Quotes',
+    description: 'Contact Heypal Patch for custom patch quotations, artwork review and international order coordination.',
+    h1: 'Contact Heypal Patch',
+    direct: 'Send your artwork, required quantity, finished size, preferred patch type and shipping country. We will review the project information and prepare a quotation based on the confirmed requirements.',
     image: '/assets/patch-use-cases.webp',
     imageAlt: 'Custom patch inquiry support',
     faqs: faqItems.slice(0, 4),
-    body: `${hero({ h1: 'Contact HeyPalPatch', direct: 'Send your artwork, required quantity, finished size, preferred patch type and shipping country. We will review the project information and prepare a quotation based on the confirmed requirements. HeyPalPatch is based in China and supports international custom patch inquiries and order coordination.', image: '/assets/patch-use-cases.webp', imageAlt: 'Custom patch inquiry support' })}
-<section class="section"><div class="wrap two-col align-start"><div class="contact-panel"><h2>Contact Information</h2><p>Email: <a href="mailto:${site.email}">${site.email}</a></p><p>WhatsApp: <a href="${site.whatsapp}?text=${encodeURIComponent(site.whatsappText)}">${site.phoneDisplay}</a></p><p>Location: China</p><div class="actions"><a class="button primary" href="mailto:${site.email}">Email Us</a><a class="button secondary" href="${site.whatsapp}?text=${encodeURIComponent(site.whatsappText)}">Chat on WhatsApp</a><a class="button secondary" href="/get-a-quote">Request a Quote</a></div></div>${quoteForm()}</div></section>
+    body: `${hero({ h1: 'Contact Heypal Patch', direct: 'Send your artwork, required quantity, finished size, preferred patch type and shipping country. We will review the project information and prepare a quotation based on the confirmed requirements.', image: '/assets/patch-use-cases.webp', imageAlt: 'Custom patch inquiry support' })}
+<section class="section"><div class="wrap quote-page-grid">${buyerChecklist()}${quoteForm()}</div></section>
 ${related(['samples-and-moq', 'shipping-and-payment', 'custom-patch-order-process'])}`
   });
 
   register({
     slug: 'get-a-quote',
-    title: 'Request a Custom Patch Quote | HeyPalPatch',
-    description: 'Request a custom patch quotation by sending artwork, quantity, size, patch type and shipping country to HeyPalPatch.',
+    title: 'Request a Custom Patch Quote | Heypal Patch',
+    description: 'Request a custom patch quotation by sending artwork, quantity, size, patch type and shipping country to Heypal Patch.',
     h1: 'Request a Custom Patch Quote',
-    direct: 'Share the basic project details so HeyPalPatch can review the artwork, compare suitable patch materials and prepare a quotation based on confirmed requirements. Required details are name, email or WhatsApp, quantity and message. Artwork can be sent through the form, email or WhatsApp.',
+    direct: 'Share the basic project details so Heypal Patch can review the artwork, compare suitable patch materials and prepare a quotation based on confirmed requirements. Required details are name, email or WhatsApp, quantity and message. Artwork can be sent through the form, email or WhatsApp.',
     image: '/assets/patch-materials-closeup.webp',
     imageAlt: 'Custom patch quote request',
     faqs: faqItems.slice(0, 5),
-    body: `${hero({ h1: 'Request a Custom Patch Quote', direct: 'Share the basic project details so HeyPalPatch can review the artwork, compare suitable patch materials and prepare a quotation based on confirmed requirements. Required details are name, email or WhatsApp, quantity and message. Artwork can be sent through the form, email or WhatsApp.', image: '/assets/patch-materials-closeup.webp', imageAlt: 'Custom patch quote request' })}
+    body: `${hero({ h1: 'Request a Custom Patch Quote', direct: 'Share the basic project details so Heypal Patch can review the artwork, compare suitable patch materials and prepare a quotation based on confirmed requirements. Required details are name, email or WhatsApp, quantity and message. Artwork can be sent through the form, email or WhatsApp.', image: '/assets/patch-materials-closeup.webp', imageAlt: 'Custom patch quote request' })}
 <section class="section"><div class="wrap two-col align-start">${buyerChecklist()}${quoteForm()}</div></section>
 ${faqBlock(faqItems.slice(0, 5))}
 ${related(['patch-types', 'samples-and-moq', 'shipping-and-payment'])}`
@@ -564,11 +554,11 @@ ${related(['patch-types', 'samples-and-moq', 'shipping-and-payment'])}`
     title: 'Custom Patch FAQ | MOQ, Samples, Proofs and Shipping',
     description: 'Answers about custom patch MOQ, physical samples, digital proof timing, production timing, PayPal payment and shipping options.',
     h1: 'Custom Patch FAQ',
-    direct: 'These answers summarize the confirmed HeyPalPatch order information: MOQ starts from 50 embroidered patches or 100 pieces for most other patch types, samples are paid, proofs are usually prepared in approximately 3-4 days, and PayPal payment is available for confirmed orders.',
+    direct: 'These answers summarize the confirmed Heypal Patch order information: MOQ starts from 50 embroidered patches or 100 pieces for most other patch types, samples are paid, proofs are usually prepared in approximately 3-4 days, and PayPal payment is available for confirmed orders.',
     image: '/assets/patch-embroidered.webp',
     imageAlt: 'Custom patch FAQ',
     faqs: faqItems,
-    body: `${hero({ h1: 'Custom Patch FAQ', direct: 'These answers summarize the confirmed HeyPalPatch order information: MOQ starts from 50 embroidered patches or 100 pieces for most other patch types, samples are paid, proofs are usually prepared in approximately 3-4 days, and PayPal payment is available for confirmed orders.', image: '/assets/patch-embroidered.webp', imageAlt: 'Custom patch FAQ' }, false)}
+    body: `${hero({ h1: 'Custom Patch FAQ', direct: 'These answers summarize the confirmed Heypal Patch order information: MOQ starts from 50 embroidered patches or 100 pieces for most other patch types, samples are paid, proofs are usually prepared in approximately 3-4 days, and PayPal payment is available for confirmed orders.', image: '/assets/patch-embroidered.webp', imageAlt: 'Custom patch FAQ' }, false)}
 ${faqBlock(faqItems)}
 ${related(['samples-and-moq', 'shipping-and-payment', 'contact'])}
 ${quoteCta()}`
@@ -576,15 +566,15 @@ ${quoteCta()}`
 
   register({
     slug: '404',
-    title: 'Page Not Found | HeyPalPatch',
-    description: 'The requested page could not be found. Continue to HeyPalPatch patch types, FAQ, contact or quote pages.',
+    title: 'Page Not Found | Heypal Patch',
+    description: 'The requested page could not be found. Continue to Heypal Patch patch types, FAQ, contact or quote pages.',
     h1: 'Page Not Found',
     direct: 'The page you requested may have moved or the URL may be incorrect. Use the links below to continue to custom patch types, FAQ, contact information or the quote form.',
     image: '/assets/patch-embroidered.webp',
-    imageAlt: 'HeyPalPatch page not found',
+    imageAlt: 'Heypal Patch page not found',
     noindex: true,
-    body: `${hero({ h1: 'Page Not Found', direct: 'The page you requested may have moved or the URL may be incorrect. Use the links below to continue to custom patch types, FAQ, contact information or the quote form.', image: '/assets/patch-embroidered.webp', imageAlt: 'HeyPalPatch page not found' }, false)}
-<section class="section"><div class="wrap card-grid"><article class="card"><h2><a href="/">Home</a></h2><p>Return to the HeyPalPatch homepage.</p></article><article class="card"><h2><a href="/patch-types">Patch Types</a></h2><p>Compare embroidered, woven, PVC, chenille, leather and printed patches.</p></article><article class="card"><h2><a href="/faq">FAQ</a></h2><p>Review MOQ, samples, proof timing, shipping and payment answers.</p></article><article class="card"><h2><a href="/contact">Contact</a></h2><p>Email or WhatsApp HeyPalPatch.</p></article><article class="card"><h2><a href="/get-a-quote">Get a Quote</a></h2><p>Send a custom patch inquiry.</p></article></div></section>`
+    body: `${hero({ h1: 'Page Not Found', direct: 'The page you requested may have moved or the URL may be incorrect. Use the links below to continue to custom patch types, FAQ, contact information or the quote form.', image: '/assets/patch-embroidered.webp', imageAlt: 'Heypal Patch page not found' }, false)}
+<section class="section"><div class="wrap card-grid"><article class="card"><h2><a href="/">Home</a></h2><p>Return to the Heypal Patch homepage.</p></article><article class="card"><h2><a href="/patch-types">Patch Types</a></h2><p>Compare embroidered, woven, PVC, chenille, leather and printed patches.</p></article><article class="card"><h2><a href="/faq">FAQ</a></h2><p>Review MOQ, samples, proof timing, shipping and payment answers.</p></article><article class="card"><h2><a href="/contact">Contact</a></h2><p>Use the quote form to send project details.</p></article><article class="card"><h2><a href="/get-a-quote">Get a Quote</a></h2><p>Send a custom patch inquiry.</p></article></div></section>`
   });
 }
 
@@ -594,29 +584,29 @@ function buildProducts() {
 
 function buildIntentPages() {
   intentPages.forEach(([slug, h1, description, direct, img, links]) => {
-    standardPage(slug, h1, `${h1} | HeyPalPatch`, description, direct, intentSections(slug, direct), links, imagePath(img));
+    standardPage(slug, h1, `${h1} | Heypal Patch`, description, direct, intentSections(slug, direct), links, imagePath(img));
   });
 }
 
 function buildGuidePages() {
   guidePages.forEach(([slug, h1, description, direct, links]) => {
-    standardPage(slug, h1, `${h1} | HeyPalPatch`, description, direct, guideSections(slug, direct), links, '/assets/patch-materials-closeup.webp');
+    standardPage(slug, h1, `${h1} | Heypal Patch`, description, direct, guideSections(slug, direct), links, '/assets/patch-materials-closeup.webp');
   });
 }
 
 function buildUtilityPages() {
   const utility = [
     ['gallery', 'Custom Patch Gallery', 'View custom patch material references for embroidered, woven, PVC, chenille, leather and printed patches.', 'Use the gallery to compare texture, color separation, edge thickness and typical applications before requesting a quotation. Final patch details follow the approved digital proof and the confirmed order requirements.', ['patch-types', 'custom-patch-order-process', 'get-a-quote']],
-    ['blog', 'Custom Patch Buyer Guides', 'Read practical custom patch buyer guides about materials, backing options, artwork preparation, MOQ and shipping.', 'The HeyPalPatch guide section helps buyers prepare artwork, compare materials and understand order steps without relying on fixed price claims or unverified business information.', ['how-to-design-a-custom-patch', 'custom-patch-file-formats', 'patch-care-guide']],
+    ['blog', 'Custom Patch Buyer Guides', 'Read practical custom patch buyer guides about materials, backing options, artwork preparation, MOQ and shipping.', 'The Heypal Patch guide section helps buyers prepare artwork, compare materials and understand order steps without relying on fixed price claims or unverified business information.', ['how-to-design-a-custom-patch', 'custom-patch-file-formats', 'patch-care-guide']],
     ['patch-backing-options', 'Patch Backing Options', 'Compare sew-on, iron-on, hook-and-loop, adhesive and no-backing options for custom patches.', 'Patch backing affects how a patch attaches to a garment, bag or display item. The right choice depends on fabric, wear, washing, removability and the selected patch type.', ['custom-iron-on-patches', 'custom-sew-on-patches', 'custom-velcro-patches']],
     ['patch-border-options', 'Patch Border Options', 'Compare merrowed, heat-cut, laser-cut and molded patch borders for different shapes and materials.', 'Patch borders affect edge thickness, shape precision and visual style. Simple shapes may use merrowed borders, while custom outlines often need heat-cut or laser-cut edges.', ['merrowed-border-vs-heat-cut-border', 'custom-embroidered-patches', 'custom-woven-patches']],
     ['custom-patch-size-guide', 'Custom Patch Size Guide', 'Plan practical custom patch sizes for hats, jackets, uniforms, bags and merchandise.', 'Patch size affects readability, detail, texture and placement. Buyers should confirm finished size together with artwork, backing, border and intended application before quotation.', ['custom-patches-for-hats', 'custom-patches-for-jackets', 'custom-patches-for-uniforms']],
-    ['custom-patch-backing-options-guide', 'Custom Patch Backing Options Guide', 'Review backing choices for custom patches and when to consider sew-on, iron-on or hook-and-loop attachment.', 'Backing should be selected around the garment, expected wear and whether the patch needs to be removable. HeyPalPatch can review application details before recommending options.', ['patch-backing-options', 'iron-on-vs-sew-on-patches', 'custom-velcro-patches']],
+    ['custom-patch-backing-options-guide', 'Custom Patch Backing Options Guide', 'Review backing choices for custom patches and when to consider sew-on, iron-on or hook-and-loop attachment.', 'Backing should be selected around the garment, expected wear and whether the patch needs to be removable. Heypal Patch can review application details before recommending options.', ['patch-backing-options', 'iron-on-vs-sew-on-patches', 'custom-velcro-patches']],
     ['self-adhesive-vs-sew-on-patches', 'Self-Adhesive vs Sew-On Patches', 'Compare temporary adhesive backing and durable sew-on backing for custom patch applications.', 'Self-adhesive patches are usually better for temporary use, packaging or display applications. Sew-on backing is often better for garments, bags and high-wear items.', ['custom-sew-on-patches', 'patch-backing-options', 'patch-care-guide']],
-    ['custom-patches-for-business', 'Custom Patches for Business', 'Coordinate custom business patches for uniforms, merch, events and branded packaging.', 'Business patch orders usually need consistent artwork, clear size requirements and a material that fits the use case. HeyPalPatch coordinates quotation, proof approval and shipping support.', ['custom-logo-patches', 'custom-patches-for-uniforms', 'get-a-quote']],
+    ['custom-patches-for-business', 'Custom Patches for Business', 'Coordinate custom business patches for uniforms, merch, events and branded packaging.', 'Business patch orders usually need consistent artwork, clear size requirements and a material that fits the use case. Heypal Patch coordinates quotation, proof approval and shipping support.', ['custom-logo-patches', 'custom-patches-for-uniforms', 'get-a-quote']],
     ['custom-motorcycle-patches', 'Custom Motorcycle Patches', 'Plan custom motorcycle patches for jackets, clubs and gear with durable backing and border guidance.', 'Motorcycle patches often need durable attachment, readable design and a size suitable for jackets or gear. Sew-on embroidered or chenille styles may be considered based on artwork.', ['custom-patches-for-jackets', 'custom-sew-on-patches', 'custom-embroidered-patches']]
   ];
-  utility.forEach(([slug, h1, description, direct, links]) => standardPage(slug, h1, `${h1} | HeyPalPatch`, description, direct, utilitySections(slug, direct), links));
+  utility.forEach(([slug, h1, description, direct, links]) => standardPage(slug, h1, `${h1} | Heypal Patch`, description, direct, utilitySections(slug, direct), links));
 }
 
 buildCorePages();
