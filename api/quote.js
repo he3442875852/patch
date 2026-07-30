@@ -219,9 +219,11 @@ async function sendWithResend(to, payload) {
     body: JSON.stringify(body)
   });
   if (!response.ok) {
-    const error = new Error(`Resend failed: ${await response.text()}`);
+    const detail = await response.text();
+    const resendMessage = readProviderMessage(detail);
+    const error = new Error(`Resend failed: ${resendMessage}`);
     error.statusCode = 502;
-    error.publicMessage = 'Quote email could not be sent. Please try again later.';
+    error.publicMessage = `Quote email could not be sent: ${resendMessage}`;
     throw error;
   }
 }
@@ -233,9 +235,23 @@ async function sendWithWebhook(payload) {
     body: JSON.stringify(payload)
   });
   if (!response.ok) {
-    const error = new Error('Fallback webhook failed.');
+    const detail = await response.text();
+    const error = new Error(`Fallback webhook failed: ${readProviderMessage(detail)}`);
     error.statusCode = 502;
     error.publicMessage = 'Quote request could not be delivered. Please try again later.';
     throw error;
   }
+}
+
+function readProviderMessage(text) {
+  if (!text) return 'email provider rejected the request.';
+  try {
+    const data = JSON.parse(text);
+    if (typeof data.message === 'string') return data.message;
+    if (typeof data.error === 'string') return data.error;
+    if (data.error && typeof data.error.message === 'string') return data.error.message;
+  } catch {
+    // Keep the original text below.
+  }
+  return String(text).slice(0, 300);
 }

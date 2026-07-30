@@ -98,19 +98,27 @@
         headers: { Accept: 'application/json' }
       });
       const result = await response.json().catch(() => ({}));
-      if (!response.ok || result.ok === false) throw new Error(result.error || 'Submission failed.');
+      if (!response.ok || result.ok === false) throw new Error(readErrorMessage(result.error || result.message));
       form.reset();
       const nameTarget = form.querySelector('[data-file-name]');
       if (nameTarget) nameTarget.textContent = 'No file selected';
       setStatus(form, 'Thanks. Your request has been sent.', 'success');
     } catch (error) {
-      setStatus(form, `${error.message} Please try again or use the WhatsApp button.`, 'error');
+      setStatus(form, `${readErrorMessage(error && error.message)} Please try again or use the WhatsApp button.`, 'error');
     } finally {
       if (button) {
         button.disabled = false;
         button.textContent = originalText;
       }
     }
+  }
+
+  function readErrorMessage(error) {
+    if (!error) return 'Submission failed.';
+    if (typeof error === 'string') return error;
+    if (typeof error.message === 'string') return error.message;
+    if (typeof error.error === 'string') return error.error;
+    return 'Submission failed.';
   }
 
   document.querySelectorAll('#quoteForm').forEach((form) => {
